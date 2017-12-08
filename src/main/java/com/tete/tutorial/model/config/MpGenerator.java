@@ -52,7 +52,7 @@ public class MpGenerator {
 		dsc.setDriverName("com.mysql.jdbc.Driver");
 		dsc.setUsername("root");
 		dsc.setPassword("123456");
-		dsc.setUrl("jdbc:mysql://39.108.88.172:3306/tutorial?characterEncoding=utf8");
+		dsc.setUrl("jdbc:mysql://10.10.0.151:3306/tutorial?characterEncoding=utf8");
 		mpg.setDataSource(dsc);
 
 		// 策略配置
@@ -61,7 +61,7 @@ public class MpGenerator {
 		strategy.setTablePrefix(new String[] { "t_" });// 此处可以修改为您的表前缀
 		strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 		strategy.setInclude(
-				new String[] { "book","class","course","department","order_book","resource","role","section","speciality","staff","student","takes","timetable","user"}); // 需要生成的表
+				new String[] { "t_book","t_class","t_resource","t_role","user"}); // 需要生成的表
 		// strategy.setExclude(new String[]{"test"}); // 排除生成的表
 		// 自定义实体父类
 		// strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
