@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tete.tutorial.model.dao.StudentMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.tete.tutorial.model.entity.Student">
+		<id column="student_id" property="studentId" />
+		<result column="student_name" property="studentName" />
+		<result column="id_card" property="idCard" />
+		<result column="year" property="year" />
+		<result column="class_id" property="classId" />
+		<result column="telephone_number" property="telephoneNumber" />
+		<result column="student_origin_base" property="studentOriginBase" />
+		<result column="gender" property="gender" />
+		<result column="pic_path" property="picPath" />
+		<result column="leave_of_absence" property="leaveOfAbsence" />
+		<result column="leave_school" property="leaveSchool" />
+	</resultMap>
+
+</mapper>

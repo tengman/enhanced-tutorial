@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tete.tutorial.model.dao.BookMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.tete.tutorial.model.entity.Book">
+		<id column="book_title" property="bookTitle" />
+		<result column="isbn" property="isbn" />
+		<result column="date_of_printing" property="dateOfPrinting" />
+		<result column="author" property="author" />
+		<result column="press" property="press" />
+		<result column="category" property="category" />
+		<result column="unit_price" property="unitPrice" />
+	</resultMap>
+
+</mapper>
