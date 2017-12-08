@@ -102,7 +102,7 @@
 				<entry key="dataSource_Slave" value-ref="readDataSource" />
 			</map>
 		</property>
-		<property name="defaultTargetDataSource" ref="masterDataSource" />
+		<property name="defaultTargetDataSource" ref="writeDataSource" />
 	</bean>
 
 	<bean id="sqlSessionFactory"
