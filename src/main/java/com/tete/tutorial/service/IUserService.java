@@ -1,0 +1,20 @@
+package com.tete.tutorial.service;
+
+import java.util.Set;
+
+import com.baomidou.mybatisplus.service.IService;
+import com.tete.tutorial.model.entity.User;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author tengman
+ * @since 2017-12-08
+ */
+public interface IUserService extends IService<User> {
+	
+	Set<String> selectRoleIds(String name);
+	
+}
