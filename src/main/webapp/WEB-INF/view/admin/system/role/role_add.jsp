@@ -6,7 +6,7 @@
 <div id="page-wrapper">
     <div class="container-fluid">
         <div>
-            <h1 class="page-header">用户管理</h1>
+            <h1 class="page-header">角色管理</h1>
         </div>
         <div class="panel-heading">
         </div>
@@ -14,7 +14,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        用户信息
+                        角色信息
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

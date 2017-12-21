@@ -1,9 +1,9 @@
 package com.tete.tutorial.util;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.output.FileWriterWithEncoding;
 
@@ -25,7 +25,7 @@ public class FreeMarkerUtil {
 		super();
 	}
 	
-	private static Configuration initInstance() throws IOException{
+	private static Configuration initInstance(HttpServletRequest req) throws IOException{
 		if(cfg == null){
 			// Create your Configuration instance, and specify if up to what FreeMarker
 			// version (here 2.3.23) do you want to apply the fixes that are not 100%
@@ -34,8 +34,9 @@ public class FreeMarkerUtil {
 			// Set the preferred charset template files are stored in. UTF-8 is
 			// a good choice in most applications:
 			cfg.setDefaultEncoding("UTF-8");
-			cfg.setClassLoaderForTemplateLoading(FreeMarkerUtil.class.getClassLoader(), "com/tete/tutorial/template");
+//			cfg.setClassLoaderForTemplateLoading(FreeMarkerUtil.class.getClassLoader(), "com/tete/tutorial/template");
 //			cfg.setDirectoryForTemplateLoading(new File("com/tete/tutorial/template/"));
+			cfg.setServletContextForTemplateLoading(req.getSession().getServletContext(), "/template");
 			// Sets how errors will appear.
 			// During web page *development* TemplateExceptionHandler.HTML_DEBUG_HANDLER is better.
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
@@ -47,9 +48,9 @@ public class FreeMarkerUtil {
 		return cfg;
 	}
 	
-	private static Template getTemplate(String fname){
+	private static Template getTemplate(String fname,HttpServletRequest req){
 		try {
-			Configuration initInstance = initInstance();
+			Configuration initInstance = initInstance(req);
 			return initInstance.getTemplate(fname);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -64,8 +65,8 @@ public class FreeMarkerUtil {
 	 * @param path 输出路径
 	 * @return
 	 */
-	public static boolean filePrint(Map<String, Object> datas,String fname,String path){
-		Template template = getTemplate(fname);
+	public static boolean filePrint(Map<String, Object> datas,String fname,String path,HttpServletRequest req){
+		Template template = getTemplate(fname,req);
 		try {
 			template.process(datas, new FileWriterWithEncoding(path,"utf-8"));
 			return true;

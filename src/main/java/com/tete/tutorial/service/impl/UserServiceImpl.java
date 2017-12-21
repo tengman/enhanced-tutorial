@@ -3,7 +3,6 @@ package com.tete.tutorial.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +72,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements IUser
 		Map<String, Object> datas = new HashMap<>();
 		datas.put("root", results);
 		String contextPath = req.getServletContext().getRealPath("/WEB-INF/view/");
-		return templateHandler.updateHomeTemplate(datas,contextPath+"homeNav.jsp");
+		return templateHandler.updateHomeTemplate(datas,contextPath+"homeNav.jsp",req);
 	}
 
 	
