@@ -1,10 +1,13 @@
 package com.tete.tutorial.model.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -44,6 +47,13 @@ public class Resource extends Model<Resource> {
      * 资源是否可用 1可用，-1不可用
      */
 	private Integer state;
+	/**
+	 * 增删改查
+	 */
+	private Integer operation;
+	
+	@TableField(exist=false)
+	private List<Resource> resources = new ArrayList<>();
 
 
 	public Integer getId() {
@@ -92,6 +102,22 @@ public class Resource extends Model<Resource> {
 
 	public void setState(Integer state) {
 		this.state = state;
+	}
+
+	public Integer getOperation() {
+		return operation;
+	}
+
+	public void setOperation(Integer operation) {
+		this.operation = operation;
+	}
+
+	public List<Resource> getResources() {
+		return resources;
+	}
+
+	public void setResources(Resource resource) {
+		this.resources.add(resource);
 	}
 
 	@Override

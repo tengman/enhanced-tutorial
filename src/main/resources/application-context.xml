@@ -151,6 +151,10 @@
     <bean id="exceptionHandlerExceptionResolver" class="com.tete.tutorial.common.DefaultExceptionHandler">
     </bean>
     
+   <bean id ="roles" class="org.apache.shiro.web.filter.authz.RolesAuthorizationFilter"></bean>
+   
+   <bean id ="templateHandler" class="com.tete.tutorial.common.TemplateHandler"></bean>
+    
     <import resource="classpath:spring-shiro.xml"/>
 
 </beans>

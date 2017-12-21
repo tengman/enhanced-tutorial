@@ -15,16 +15,16 @@
     <title>登录</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/EnhancedTutorial/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/EnhancedTutorial/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="${pageContext.request.contextPath}/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/EnhancedTutorial/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/EnhancedTutorial/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you util the page via file:// -->
@@ -45,13 +45,15 @@
                     <h3 class="panel-title">请登录</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="${pageContext.request.contextPath}/login" method="post">
-                        <fieldset>
+                <div>
+                	<span id = "message"></span>
+                </div>
+                    <form role="form" location="EnhancedTutorial/login">
                             <div class="form-group">
-                                <input class="form-control" placeholder="账户名" name="username" autofocus>
+                                <input id="username" class="form-control" placeholder="账户名" name="username" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="密码" name="password" type="password">
+                                <input id="password" class="form-control" placeholder="密码" name="password" type="password">
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -59,8 +61,7 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <input type="submit" value="登录" class="btn btn-primary form-control">
-                        </fieldset>
+                            <input id ="login" type="button" value="登录" class="btn btn-primary form-control" >
                     </form>
                 </div>
             </div>
@@ -69,21 +70,50 @@
 </div>
 
 <!-- jQuery -->
-<script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/EnhancedTutorial/bower_components/jquery/dist/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/EnhancedTutorial/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="/EnhancedTutorial/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>
+<script src="/EnhancedTutorial/dist/js/sb-admin-2.js"></script>
 
 <!-- Background -->
-<script src="${pageContext.request.contextPath}/bower_components/login/jquery.backstretch.min.js"></script>
-<script src="${pageContext.request.contextPath}/bower_components/login/scripts.js"></script>
+<script src="/EnhancedTutorial/bower_components/login/jquery.backstretch.min.js"></script>
+<script src="/EnhancedTutorial/bower_components/login/scripts.js"></script>
+<script type="text/javascript">
 
+	$(function() {
+		$("#login").click(function() {
+			var name = $("#username").val();
+			var pwd = $("#password").val();
+			var url = $("#location").val();
+			$.ajax({
+				url:"/EnhancedTutorial/login",
+				type:"post",
+				data:{
+					"username":name,
+					"password":pwd
+				},
+				dataType:"json",
+				success:function() {
+
+				},
+				error:function(res) {
+					var a = res.responseText;
+					if(a == 'ok'){
+						location.href="home";
+					}
+					$("#message").text(a);
+				}
+			});
+		});
+
+	});
+</script>
 </body>
 
 </html>

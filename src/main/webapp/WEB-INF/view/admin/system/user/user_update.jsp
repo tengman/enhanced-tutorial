@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<jsp:include page="/WEB-INF/view/admin/nav.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/view/homeNav.jsp"></jsp:include>
 
 <!-- Page Content -->
 <div id="page-wrapper">
@@ -20,10 +20,9 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <form action="${pageContext.request.contextPath}/user.do/update" method="post">
-                                <label name="id">用户名 : ${user.userId}</label>
-                                <input style="display:none" name="userId" value="${user.userId}">
-
+                            <form action="${pageContext.request.contextPath}/admin/user/update" method="post">
+                                <input style="display:none" name="id" value="${user.id}">
+                                <label name="name">用户名 :${user.name}</label>
                                 <p></p>
                                 <label>新密码</label>
                                 <input class="form-control" name="password">
@@ -31,9 +30,17 @@
                                 <input class="form-control" name="email">
 
                                 <div class="form-group">
-                                    <form:label path="roleIds">角色列表：</form:label>
-                                    <form:select path="roleIds" items="${roleList}" itemLabel="description"
-                                                 itemValue="id" multiple="true"/>
+                                <label>角色列表：</label>
+                                <select multiple="true" class="form-control" name="roleIds">
+                                    <c:forEach var="role" items="${roleList}">
+                                    		<c:if test="${role.selected == 1}">
+                                    			<option selected="selected" value="${role.id}">${role.desc}</option>
+                                    		</c:if>
+                                    		<c:if test="${role.selected == -1}">
+                                    			<option value="${role.id}">${role.desc}</option>
+                                    		</c:if>
+                                    </c:forEach>
+                                </select>
                                     (按住shift键多选)
                                 </div>
                                 <label></label>

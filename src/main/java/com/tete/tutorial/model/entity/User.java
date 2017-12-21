@@ -1,11 +1,12 @@
 package com.tete.tutorial.model.entity;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
+import java.util.Date;
+
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 
 /**
  * <p>
@@ -44,7 +45,7 @@ public class User extends Model<User> {
     /**
      * 用户状态
      */
-	private String state;
+	private Integer state;
     /**
      * 创建时间
      */
@@ -99,11 +100,11 @@ public class User extends Model<User> {
 		this.roleIds = roleIds;
 	}
 
-	public String getState() {
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 

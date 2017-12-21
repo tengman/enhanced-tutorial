@@ -12,13 +12,13 @@
     <!-- 凭证匹配器 -->
     <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <property name="hashAlgorithmName" value="md5"/>
-        <property name="hashIterations" value="1"/>
-        <property name="storedCredentialsHexEncoded" value="true"/>
     </bean>
 
+	<bean id="urlPermissionResovler" class="com.tete.tutorial.common.UrlPermissionResovler" />
     <!-- Realm实现 -->
-    <bean id="userRealm" class="com.giit.www.realm.UserRealm">
+    <bean id="userRealm" class="com.tete.tutorial.common.UserRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="permissionResolver" ref="urlPermissionResovler"/>
     </bean>
 
     <!-- 安全管理器 -->
@@ -32,24 +32,31 @@
         <property name="arguments" ref="securityManager"/>
     </bean>
 
-    <!-- 基于Form表单的身份验证过滤器 -->
-    <bean id="formAuthenticationFilter" class="com.tete.tutorial.common.FormLoginFilter">
-    </bean>
-
+	<bean id="resourceCheckFilter" class="com.tete.tutorial.common.ResourceCheckFilter">
+		<property name="errorUrl" value="unauthorized.jsp" />
+	</bean>
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="filters">
+        
+<!--         <property name="filters">
             <util:map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
             </util:map>
-        </property>
+        </property> -->
         <property name="filterChainDefinitions">
             <value>
-                /login = authc
+            	/admin/**=authc,resourceCheckFilter
+            	/login=anon
+            	/home=anon
                 /logout = logout
             </value>
         </property>
     </bean>
+    	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	    <property name="securityManager" ref="securityManager"/>
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
 </beans>

@@ -1,6 +1,7 @@
 package com.tete.tutorial.model.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -40,6 +41,11 @@ public class Role extends Model<Role> {
      * 角色状态:1-可用 -1不可用
      */
 	private Integer state;
+	/**
+	 * 是否被选中 1-选中, -1-没选中
+	 */
+	@TableField(exist=false)
+	private Integer selected;
 
 
 	public Integer getId() {
@@ -80,6 +86,14 @@ public class Role extends Model<Role> {
 
 	public void setState(Integer state) {
 		this.state = state;
+	}
+
+	public Integer getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Integer selected) {
+		this.selected = selected;
 	}
 
 	@Override
